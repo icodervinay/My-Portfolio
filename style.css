@@ -6,14 +6,15 @@
     padding: 0;
 }
 
+:root, [data-bs-theme=light] {
+    --bs-border-radius: -0.625rem !important;
+}
 .card-img{
     
     width: 100%;
     height: 85vh;
 }
-:root, [data-bs-theme=light] {
-    --bs-border-radius: -0.625rem !important;
-}
+
 
 
 .box{
