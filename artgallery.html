@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinay Art Gallery</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            position: relative;
+            top: 0;
+            width: 100%;
+            height: 300px;
+            z-index: 999;
+            overflow: hidden;
+        }
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        .header-image {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            animation: scrollImage 10s linear infinite;
+        }
+        @keyframes scrollImage {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            VINAY ART GALLERY
+        </div>
+        <img src="https://picsum.photos/1200/600" alt="Scrolling Image" class="header-image">
+    </header>
+    <style>
+        @media (max-width: 768px) {
+            header {
+                height: 200px;
+            }
+            .header-content {
+                font-size: 18px;
+            }
+            .header-image {
+                height: 400px;
+            }
+        }
+    </style>
+    <!-- Existing content -->
+
+</body>
+<section class="about" style="padding: 50px 0; text-align: center;">
+    <h2>About Vinay Art Gallery</h2>
+    <p>Welcome to Vinay Art Gallery, where creativity meets passion. Explore our collection of stunning artworks and immerse yourself in the world of art.</p>
+</section>
+
+<style>
+    @media (max-width: 768px) {
+        .card-deck {
+            flex-direction: column;
+            align-items: center;
+        }
+        .card {
+            width: 90%;
+            height: auto;
+            margin-bottom: 20px;
+            transform: none !important;
+        }
+    }
+</style>
+</html>
+
+<!-- Leave some space at the bottom -->
+<div style="height: 100px;"></div>
+<section class="card-deck" style="margin-top: 100px;">
+    <div class="card" style="background-image: url('https://picsum.photos/1200/600?random=1'); width: 400px;"></div>
+    <div class="card" style="background-image: url('https://picsum.photos/1200/600?random=2'); width: 400px;"></div>
+    <div class="card" style="background-image: url('https://picsum.photos/1200/600?random=3'); width: 400px;"></div>
+    <div class="card" style="background-image: url('https://picsum.photos/1200/600?random=4'); width: 400px;"></div>
+    <div class="card" style="background-image: url('https://picsum.photos/1200/600?random=5'); width: 400px;"></div>
+    <div class="card" style="background-image: url('https://picsum.photos/1200/600?random=6'); width: 400px;"></div>
+    <div class="card" style="background-image: url('https://picsum.photos/1200/600?random=7'); width: 400px;"></div>
+    <div class="card" style="background-image: url('https://picsum.photos/1200/600?random=8'); width: 400px;"></div>
+    <div class="card" style="background-image: url('https://picsum.photos/1200/600?random=9'); width: 400px;"></div>
+    <div class="card" style="background-image: url('https://picsum.photos/1200/600?random=10'); width: 400px;"></div>
+    <div class="card" style="background-image: url('https://picsum.photos/1200/600?random=11'); width: 400px;"></div>
+    <div class="card" style="background-image: url('https://picsum.photos/1200/600?random=12'); width: 400px;"></div>
+    <div class="card" style="background-image: url('https://picsum.photos/1200/600?random=13'); width: 400px;"></div>
+    <div class="card" style="background-image: url('https://picsum.photos/1200/600?random=14'); width: 400px;"></div>
+    <div class="card" style="background-image: url('https://picsum.photos/1200/600?random=15'); width: 400px;"></div>
+</section>
+<div id="selected-card" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1001;">
+    <script>
+        document.querySelector('.card-deck').addEventListener('click', () => {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.transform = `rotateY(${index * 10 + 10}deg) translateZ(${index * -20 - 20}px)`;
+            });
+        });
+        document.addEventListener('click', (event) => {
+            const selectedCard = document.getElementById('selected-card');
+            if (!event.target.closest('.card') && !event.target.closest('#selected-card')) {
+                selectedCard.style.display = 'none';
+
+                // Reshuffle the cards
+                const cards = document.querySelectorAll('.card');
+                cards.forEach((card, index) => {
+                    card.style.transform = `rotateY(${index * 10}deg) translateZ(${index * -20}px)`;
+                });
+            }
+        });
+    </script>
+    <img id="selected-card-image" src="" alt="Selected Card" style="max-width: 100%; max-height: 100vh; border: 5px solid white; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+</div>
+<script>
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', () => {
+            const imageUrl = card.style.backgroundImage.slice(5, -2);
+            const selectedCard = document.getElementById('selected-card');
+            const selectedCardImage = document.getElementById('selected-card-image');
+            selectedCardImage.src = imageUrl;
+            selectedCard.style.display = 'block';
+
+            // Move the selected card to the top of the deck
+            const cardDeck = document.querySelector('.card-deck');
+            cardDeck.prepend(card);
+
+            // Reshuffle the cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.transform = `rotateY(${index * 10}deg) translateZ(${index * -20}px)`;
+            });
+        });
+    });
+
+    document.getElementById('selected-card').addEventListener('click', () => {
+        document.getElementById('selected-card').style.display = 'none';
+    });
+</script>
+<script>
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', () => {
+            const imageUrl = card.style.backgroundImage.slice(5, -2);
+            const selectedCard = document.getElementById('selected-card');
+            const selectedCardImage = document.getElementById('selected-card-image');
+            selectedCardImage.src = imageUrl;
+            selectedCard.style.display = 'block';
+
+            // Move the selected card to the top of the deck
+            const cardDeck = document.querySelector('.card-deck');
+            cardDeck.prepend(card);
+
+            // Reshuffle the cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.transform = `rotateY(${index * 10}deg) translateZ(${index * -20}px)`;
+            });
+        });
+    });
+
+    document.getElementById('selected-card').addEventListener('click', () => {
+        document.getElementById('selected-card').style.display = 'none';
+    });
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', () => {
+            const imageUrl = card.style.backgroundImage.slice(5, -2);
+            const selectedCard = document.getElementById('selected-card');
+            const selectedCardImage = document.getElementById('selected-card-image');
+            selectedCardImage.src = imageUrl;
+            selectedCard.style.display = 'block';
+
+            // Move the selected card to the top of the deck
+            const cardDeck = document.querySelector('.card-deck');
+            cardDeck.prepend(card);
+
+            // Reshuffle the cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.transform = `rotateY(${index * 10}deg) translateZ(${index * -20}px)`;
+            });
+        });
+    });
+
+    document.getElementById('selected-card').addEventListener('click', () => {
+        document.getElementById('selected-card').style.display = 'none';
+    });
+</script>
+<div id="selected-card" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1001;">
+    <img id="selected-card-image" src="" alt="Selected Card" style="max-width: 100%; max-height: 100vh; border: 5px solid white; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+</div>
+<div style="height: 400px;"></div>
+<footer style="background-color: #f8f8f8; padding: 20px; text-align: left; color: grey; font-size: 12px; font-weight: normal;">
+    <h4 class="card-title" style="font-weight: normal; color: grey;">VINAY ART GALLERY</h4>
+    <h5 style="font-weight: normal;">D-40  Dehradun,UK 248011, India | T +91 8267009117 </h5>
+    <h5 style="font-weight: normal;">D-53  Dehradun,UK 248011, India | T +91 11 8267009117</h5>
+    <h5 style="font-weight: normal;">E art@vadehraart.com</h5>
+    <h5 style="font-weight: normal;">Monday to Saturday, 10 am - 6 pm</h5>
+    <div style="text-align: right; margin-top: 10px;">
+        <a href="https://www.facebook.com" target="_blank" style="color: grey; text-decoration: none; margin: 0 10px;">
+            <i class="fab fa-facebook-f" style="font-size: 16px;"></i>
+        </a>
+        <a href="https://www.instagram.com" target="_blank" style="color: grey; text-decoration: none; margin: 0 10px;">
+            <i class="fab fa-instagram" style="font-size: 16px;"></i>
+        </a>
+        <a href="https://wa.me/918267009117" target="_blank" style="color: grey; text-decoration: none; margin: 0 10px;">
+            <i class="fab fa-whatsapp" style="font-size: 16px;"></i>
+        </a>
+        <a href="mailto:art@vadehraart.com" style="color: grey; text-decoration: none; margin: 0 10px;">
+            <i class="fas fa-envelope" style="font-size: 16px;"></i>
+        </a>
+    </div>
+    <div style="text-align: center; margin-top: 60px;">
+        <a href="https://www.facebook.com" target="_blank" style="color: grey; text-decoration: none;">Facebook</a>, 
+        <a href="https://www.instagram.com" target="_blank" style="color: grey; text-decoration: none;">Instagram</a>, 
+        <a href="mailto:art@vadehraart.com" style="color: grey; text-decoration: none;">Send an email</a>, 
+        <a href="https://www.google.com/maps" target="_blank" style="color: grey; text-decoration: none;">View on Google Maps</a>, 
+        <a href="#" style="color: grey; text-decoration: none;">Join the mailing list</a>, 
+        <a href="#" style="color: grey; text-decoration: none;">Manage cookies</a>
+    </div>
+    <p style="text-align: center;">Copyright © 2024 Vinay Art Gallery | Site by Ainz /AZ</p>
+</footer>
+<script>
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', () => {
+            const imageUrl = card.style.backgroundImage.slice(5, -2);
+            const selectedCard = document.getElementById('selected-card');
+            const selectedCardImage = document.getElementById('selected-card-image');
+            selectedCardImage.src = imageUrl;
+            selectedCard.style.display = 'block';
+        });
+    });
+
+    document.getElementById('selected-card').addEventListener('click', () => {
+        document.getElementById('selected-card').style.display = 'none';
+    });
+</script>
+
+<style>
+    .card-deck {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        perspective: 1000px;
+        margin-top: 50px;
+    }
+    .card {
+        width: 300px;
+        height: 450px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transform-style: preserve-3d;
+        transition: transform 0.5s;
+        position: relative;
+        margin: 0 10px;
+    }
+    .card:nth-child(1) { transform: rotateY(0deg) translateZ(0px); }
+    .card:nth-child(2) { transform: rotateY(10deg) translateZ(-20px); }
+    .card:nth-child(3) { transform: rotateY(20deg) translateZ(-40px); }
+    .card:nth-child(4) { transform: rotateY(30deg) translateZ(-60px); }
+    .card:nth-child(5) { transform: rotateY(40deg) translateZ(-80px); }
+</style>
+
+<script>
+    document.querySelector('.card-deck').addEventListener('click', () => {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach((card, index) => {
+            card.style.transform = `rotateY(${index * 10 + 10}deg) translateZ(${index * -20 - 20}px)`;
+        });
+    });
+</script>
+
+<style>
+    .card-deck {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        perspective: 1000px;
+        margin-top: 50px;
+    }
+    .card {
+        width: 200px;
+        height: 300px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transform-style: preserve-3d;
+        transition: transform 0.5s;
+        position: absolute;
+    }
+    .card:nth-child(1) { transform: rotateY(0deg) translateZ(0px); }
+    .card:nth-child(2) { transform: rotateY(10deg) translateZ(-20px); }
+    .card:nth-child(3) { transform: rotateY(20deg) translateZ(-40px); }
+    .card:nth-child(4) { transform: rotateY(30deg) translateZ(-60px); }
+    .card:nth-child(5) { transform: rotateY(40deg) translateZ(-80px); }
+</style>
+
+<script>
+    document.querySelector('.card-deck').addEventListener('click', () => {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach((card, index) => {
+            card.style.transform = `rotateY(${index * 10 + 10}deg) translateZ(${index * -20 - 20}px)`;
+        });
+    });
+</script>

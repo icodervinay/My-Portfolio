@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Education Details</title>
+<!-- Bootstrap CSS -->
+<link href="
+https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css
+" rel="stylesheet">
+<style>
+.timeline::before {
+content: '';
+position: absolute;
+width: 4px;
+background-color: #dee2e6;
+top: 0;
+bottom: 0;
+left: 50%;
+margin-left: -2px;
+}
+.timeline-item {
+position: relative;
+margin: 0 0 20px;
+padding-left: 50px;
+padding-right: 50px;
+}
+.timeline-item::before {
+content: '';
+position: absolute;
+width: 16px;
+height: 16px;
+border-radius: 50%;
+background-color: #007bff;
+left: 50%;
+top: 0;
+margin-left: -8px;
+margin-top: -8px;
+}
+.bg-secondary {
+    background-image:linear-gradient(90deg, #efd5ff 0%, #515ada 100%); 
+}
+h1 {
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  font-size: 2.5rem;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+</style>
+</head>
+<body>
+
+<!-- Header Section -->
+<header class="bg-secondary text-white text-center py-5">
+<h1>Education Details</h1>
+<p>A Timeline of Academic Achievements</p>
+</header>
+<div style="margin-top: 120px;"></div>
+<!-- Cube Swipe CSS -->
+<style>
+.cube-container {
+    perspective: 1000px;
+    margin: 50px auto;
+    width: 300px;
+    height: 300px;
+    position: relative;
+}
+
+.cube {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    transform-style: preserve-3d;
+    animation: rotate 10s infinite linear;
+}
+
+.cube div {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ccc;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+.cube .front  { transform: rotateY(0deg) translateZ(150px); }
+.cube .back   { transform: rotateY(180deg) translateZ(150px); }
+.cube .left   { transform: rotateY(-90deg) translateZ(150px); }
+.cube .right  { transform: rotateY(90deg) translateZ(150px); }
+.cube .top    { transform: rotateX(90deg) translateZ(150px); }
+.cube .bottom { transform: rotateX(-90deg) translateZ(150px); }
+
+@keyframes rotate {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(-360deg); }
+}
+</style>
+
+<!-- Cube Swipe HTML -->
+<div class="cube-container">
+    <div class="cube">
+        <div class="front">B.SC. (Graphics and Web Designing)<br>Graphic Era Hill University, Dehradun<br>2023 to Current</div>
+        <div class="left">Bachelor of Physical Education (B.P.Ed.)<br>Jaspal Rana Institute of Education & Technology, Dehradun<br>2022 to 2023</div>
+        <div class="back">Higher secondary Education<br>Doon Heritage School, Dehradun<br>2020 to 2022</div>
+        <div class="right">High School<br>Doon Heritage School, Dehradun<br>2018 to 2020</div>
+        <div class="top">A Timeline of Academic Achievements</div>
+        <div class="bottom">&copy; 2024 Vinay Rawat. All Rights Reserved.</div>
+    </div>
+</div>
+<style>
+.cube div {
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+.cube .front  { background-image: url('https://picsum.photos/300/200?random=13'); }
+.cube .back   { background-image: url('https://picsum.photos/300/200?random=14'); }
+.cube .left   { background-image: url('https://picsum.photos/300/200?random=15'); }
+.cube .right  { background-image: url('https://picsum.photos/300/200?random=16'); }
+.cube .top    { background-image: url('https://picsum.photos/300/200?random=17'); }
+</style>
+<!-- Education Section -->
+<section class="container my-5">
+<div class="timeline position-relative">
+<!-- Education Item 1 -->
+<style>
+    .timeline-item h5 {
+        padding: 10px;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        color: #007bff;
+    }
+    .timeline {
+        margin-top: 150px;
+    }
+</style>
+<div class="timeline-item mb-5">
+<h5 class="font-weight-bold">B.SC. (Graphics and Web Designing)</h5>
+<p class="text-muted mb-1">Graphic Era Hill University, Dehradun - 2023 to Current </p>
+<p>Gained in-depth knowledge in  making use of  designing software , tools, and designing methods, Geometry and Art.</p>
+</div>
+
+<div class="timeline-item mb-5">
+    <h5 class="font-weight-bold">Bachelor of Physical Education (B.P.Ed.) </h5>
+    <p class="text-muted mb-1">Jaspal Rana Institute of Education & Technology, Dehradun  - 2022 to 2023    </p>
+    <p>Improved my skills in various games learned  right approach to initiate, complete a task and about Team planning.</p>
+    </div>
+
+<!-- Education Item 2 -->
+<div class="timeline-item mb-5">
+<h5 class="font-weight-bold">Higher secondary Education</h5>
+<p class="text-muted mb-1">Doon Heritage School, Dehradun - 2020 to 2022</p>
+<p>Completed foundational education with a strong focus on STEM subjects.</p>
+</div>
+
+<!-- Education Item 3 -->
+<div class="timeline-item mb-5">
+<h5 class="font-weight-bold">High School</h5>
+<p class="text-muted mb-1">Doon Heritage School(Dehradun) - 2018 to 2020</p>
+<p> Specialized in science subjects with a focus on mathematics and Other Subjects.</p>
+</div>
+</div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-secondary text-white text-center py-3">
+<p>&copy; 2024 Vinay Rawat. All Rights Reserved.</p>
+</footer>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="
+https://stackpath.bootstrapcdn.com/bootstrap

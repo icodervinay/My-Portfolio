@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Shapes Models</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        header {
+            position: relative;
+            width: 100vw;
+            height: 200px;
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .cube {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            transform-style: preserve-3d;
+            animation: rotate 5s infinite linear;
+        }
+        .cube div {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: rgb(149, 69, 247);
+            border: 1px solid #ccc;
+        }
+        .front  { transform: translateZ(25px); }
+        .back   { transform: rotateY(180deg) translateZ(25px); }
+        .right  { transform: rotateY(90deg) translateZ(25px); }
+        .left   { transform: rotateY(-90deg) translateZ(25px); }
+        .top    { transform: rotateX(90deg) translateZ(25px); }
+        .bottom { transform: rotateX(-90deg) translateZ(25px); }
+
+        @keyframes rotate {
+            from { transform: rotateX(0deg) rotateY(0deg); }
+            to { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        .color-picker {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .sketchfab-embed-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Added box shadow */
+        }
+        .sketchfab-embed-wrapper iframe {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        3D Shape &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;& Models
+        <div class="cube" id="cube">
+            <div class="front"></div>
+            <div class="back"></div>
+            <div class="right"></div>
+            <div class="left"></div>
+            <div class="top"></div>
+            <div class="bottom"></div>
+        </div>
+        <input type="color" class="color-picker" id="colorPicker" value="#ffffff">
+    </header>
+    <section class="about" style="padding: 50px 0; text-align: center;">
+        <h2>About Vinay 3D Art Gallery</h2>
+        <p>Welcome to Vinay's 3D Art Gallery, where imagination takes shape. Dive into a world of intricate 3D models and experience the artistry of digital sculpting and design.</p>
+    </section>
+    <style>
+        .tiles {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px;
+        }
+        .tile {
+            width: 300px;
+            text-align: center;
+        }
+        .tile iframe {
+            width: 100%;
+            height: 200px;
+        }
+    </style>
+    <div class="model-switcher">
+        <button onclick="showModel('model1')" class="model-button">Model 1</button>
+        <button onclick="showModel('model2')" class="model-button">Model 2</button>
+        <button onclick="showModel('model3')" class="model-button">Model 3</button>
+        <button onclick="showModel('model4')" class="model-button">Model 4</button>
+        <button onclick="showModel('model5')" class="model-button">Model 5</button>
+        <button onclick="showModel('model6')" class="model-button">Model 6</button>
+        <button onclick="showModel('model7')" class="model-button">Model 7</button>
+        <button onclick="showModel('model8')" class="model-button">Model 8</button>
+        <button onclick="showModel('model9')" class="model-button">Model 9</button>
+        <button onclick="showModel('model10')" class="model-button">Model 10</button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modelSwitcher = document.querySelector('.model-switcher');
+            const toggleButton = document.createElement('button');
+            toggleButton.textContent = 'Toggle Models';
+            toggleButton.classList.add('model-button');
+            toggleButton.style.display = 'none';
+            document.body.insertBefore(toggleButton, modelSwitcher);
+
+            toggleButton.addEventListener('click', function() {
+                if (modelSwitcher.style.display === 'none' || modelSwitcher.style.display === '') {
+                    modelSwitcher.style.display = 'flex';
+                } else {
+                    modelSwitcher.style.display = 'none';
+                }
+            });
+
+            function checkViewport() {
+                if (window.innerWidth <= 768) {
+                    toggleButton.style.display = 'block';
+                    modelSwitcher.style.display = 'none';
+                } else {
+                    toggleButton.style.display = 'none';
+                    modelSwitcher.style.display = 'flex';
+                }
+            }
+
+            window.addEventListener('resize', checkViewport);
+            checkViewport();
+        });
+    </script>
+    <style>
+        @media (max-width: 768px) {
+            .model-switcher {
+                flex-wrap: wrap;
+            }
+            .model-button {
+                margin: 5px 0;
+                width: 100%;
+            }
+            .sketchfab-embed-wrapper iframe {
+                height: 300px;
+            }
+        }
+    </style>
+    <style>
+        .model-button {
+            background-color: #1CAAD9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .model-button:hover {
+            background-color: #1488b5;
+        }
+    </style>
+    <style>
+        .model-switcher {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .model-button {
+            background-color: #1CAAD9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .model-button:hover {
+            background-color: #1488b5;
+        }
+    </style>
+    <!-- Model 1 -->
+    <div class="sketchfab-embed-wrapper" id="model1">
+        <iframe title="Hogger" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/8f6f0106881a49bb885794d67a235a9f/embed"></iframe>
+        <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A; text-align: center;">
+            <a href="https://sketchfab.com/3d-models/hogger-8f6f0106881a49bb885794d67a235a9f?utm_medium=embed&utm_campaign=share-popup&utm_content=8f6f0106881a49bb885794d67a235a9f" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Hogger</a> by 
+            <a href="https://sketchfab.com/timmoreels?utm_medium=embed&utm_campaign=share-popup&utm_content=8f6f0106881a49bb885794d67a235a9f" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Vinay Rawat</a> on 
+            <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=8f6f0106881a49bb885794d67a235a9f" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>
+        </p>
+    </div>
+
+    <!-- Model 2 -->
+    <div class="sketchfab-embed-wrapper" id="model2" style="display:none;">
+        <iframe title="Greek Trireme" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/5088e0e545824e30818fa4793ee80835/embed"></iframe>
+        <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A; text-align: center;">
+            <a href="https://sketchfab.com/3d-models/greek-trireme-5088e0e545824e30818fa4793ee80835?utm_medium=embed&utm_campaign=share-popup&utm_content=5088e0e545824e30818fa4793ee80835" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Greek Trireme</a> by 
+            <a href="https://sketchfab.com/msevere?utm_medium=embed&utm_campaign=share-popup&utm_content=5088e0e545824e30818fa4793ee80835" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Mikaël Sévère</a> on 
+            <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=5088e0e545824e30818fa4793ee80835" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>
+        </p>
+    </div>
+
+    <!-- Model 3 -->
+    <div class="sketchfab-embed-wrapper" id="model3" style="display:none;">
+        <iframe title="Hitman Hardballer Pistol" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/9a34bc2ce6d04729828fbaa96db8dd48/embed"></iframe>
+        <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A; text-align: center;">
+            <a href="https://sketchfab.com/3d-models/hitman-hardballer-pistol-9a34bc2ce6d04729828fbaa96db8dd48?utm_medium=embed&utm_campaign=share-popup&utm_content=9a34bc2ce6d04729828fbaa96db8dd48" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Hitman Hardballer Pistol</a> by 
+            <a href="https://sketchfab.com/nkilstrup?utm_medium=embed&utm_campaign=share-popup&utm_content=9a34bc2ce6d04729828fbaa96db8dd48" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Nicolai Kilstrup</a> on 
+            <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=9a34bc2ce6d04729828fbaa96db8dd48" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>
+        </p>
+    </div>
+
+    <!-- Model 4 -->
+    <div class="sketchfab-embed-wrapper" id="model4" style="display:none;">
+        <iframe title="John Cena (SVR 2008 - PS2)" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/dd191b1e58b34f74b05ce9ecaf334a0e/embed"></iframe>
+        <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A; text-align: center;">
+            <a href="https://sketchfab.com/3d-models/john-cena-svr-2008-ps2-dd191b1e58b34f74b05ce9ecaf334a0e?utm_medium=embed&utm_campaign=share-popup&utm_content=dd191b1e58b34f74b05ce9ecaf334a0e" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">John Cena (SVR 2008 - PS2)</a> by 
+            <a href="https://sketchfab.com/uzzi47?utm_medium=embed&utm_campaign=share-popup&utm_content=dd191b1e58b34f74b05ce9ecaf334a0e" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">uzzi47</a> on 
+            <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=dd191b1e58b34f74b05ce9ecaf334a0e" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>
+        </p>
+    </div>
+
+    <!-- Model 5 -->
+    <div class="sketchfab-embed-wrapper" id="model5" style="display:none;">
+        <iframe title="a frog or a shark" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/a3e7eac9cd4f42c29432f314b43d67f7/embed"></iframe>
+        <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A; text-align: center;">
+            <a href="https://sketchfab.com/3d-models/a-frog-or-a-shark-a3e7eac9cd4f42c29432f314b43d67f7?utm_medium=embed&utm_campaign=share-popup&utm_content=a3e7eac9cd4f42c29432f314b43d67f7" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">a frog or a shark</a> by 
+            <a href="https://sketchfab.com/danilivantsov?utm_medium=embed&utm_campaign=share-popup&utm_content=a3e7eac9cd4f42c29432f314b43d67f7" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Danil Ivantsov</a> on 
+            <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=a3e7eac9cd4f42c29432f314b43d67f7" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>
+        </p>
+    </div>
+    <!-- Model 6 -->
+    <div class="sketchfab-embed-wrapper" id="model6" style="display:none;">
+        <iframe title="Tyrannosaurus Rex 3.1" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/f1bd8fcd553241a695712edab73ad81f/embed"></iframe>
+        <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A; text-align: center;">
+            <a href="https://sketchfab.com/3d-models/tyrannosaurus-rex-31-f1bd8fcd553241a695712edab73ad81f?utm_medium=embed&utm_campaign=share-popup&utm_content=f1bd8fcd553241a695712edab73ad81f" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Tyrannosaurus Rex 3.1</a> by 
+            <a href="https://sketchfab.com/3dartstevenz?utm_medium=embed&utm_campaign=share-popup&utm_content=f1bd8fcd553241a695712edab73ad81f" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">3dartstevenz</a> on 
+            <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=f1bd8fcd553241a695712edab73ad81f" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>
+        </p>
+    </div>
+    <!-- Model 7 -->
+    <div class="sketchfab-embed-wrapper" id="model7" style="display:none;">
+        <iframe title="Lazy Cat On Bike" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/fc17f8a559cd4d75b7b75d1fb146266f/embed"></iframe>
+        <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A; text-align: center;">
+            <a href="https://sketchfab.com/3d-models/lazy-cat-on-bike-fc17f8a559cd4d75b7b75d1fb146266f?utm_medium=embed&utm_campaign=share-popup&utm_content=fc17f8a559cd4d75b7b75d1fb146266f" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Lazy Cat On Bike</a> by 
+            <a href="https://sketchfab.com/wz?utm_medium=embed&utm_campaign=share-popup&utm_content=fc17f8a559cd4d75b7b75d1fb146266f" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">wz</a> on 
+            <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=fc17f8a559cd4d75b7b75d1fb146266f" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>
+        </p>
+    </div>
+    
+    <!-- Model 8 -->
+    <div class="sketchfab-embed-wrapper" id="model8" style="display:none;">
+        <iframe title="Model 8" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/your-model-id/embed"></iframe>
+        <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A; text-align: center;">
+            <a href="https://sketchfab.com/3d-models/your-model-id?utm_medium=embed&utm_campaign=share-popup&utm_content=your-model-id" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Model 8</a> by 
+            <a href="https://sketchfab.com/your-profile?utm_medium=embed&utm_campaign=share-popup&utm_content=your-model-id" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Your Name</a> on 
+            <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=your-model-id" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>
+        </p>
+    </div>
+
+    <!-- Model 9 -->
+    <div class="sketchfab-embed-wrapper" id="model9" style="display:none;">
+        <iframe title="Model 9" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/your-model-id/embed"></iframe>
+        <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A; text-align: center;">
+            <a href="https://sketchfab.com/3d-models/your-model-id?utm_medium=embed&utm_campaign=share-popup&utm_content=your-model-id" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Model 9</a> by 
+            <a href="https://sketchfab.com/your-profile?utm_medium=embed&utm_campaign=share-popup&utm_content=your-model-id" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Your Name</a> on 
+            <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=your-model-id" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>
+        </p>
+    </div>
+
+    <!-- Model 10 -->
+    <div class="sketchfab-embed-wrapper" id="model10" style="display:none;">
+        <iframe title="Model 10" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/your-model-id/embed"></iframe>
+        <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A; text-align: center;">
+            <a href="https://sketchfab.com/3d-models/your-model-id?utm_medium=embed&utm_campaign=share-popup&utm_content=your-model-id" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Model 10</a> by 
+            <a href="https://sketchfab.com/your-profile?utm_medium=embed&utm_campaign=share-popup&utm_content=your-model-id" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Your Name</a> on 
+            <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=your-model-id" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>
+        </p>
+    </div>
+
+    <section class="ending-description" style="padding: 50px 0; text-align: center; background-color: #f8f8f8; color: #333;">
+        <p style="font-size: 1.2em; max-width: 800px; margin: 0 auto; line-height: 1.6; color: #666;"></p>
+            We hope you enjoyed exploring the 3D models at Vinay's Art Gallery. Stay tuned for more amazing creations and updates. Feel free to reach out to us for any inquiries or collaborations.
+        </p>
+        <div style="margin-top: 30px;">
+            <a href="mailto:art@vadehraart.com" style="color: #1CAAD9; text-decoration: none; font-size: 1.2em; margin: 0 10px;">Contact Us</a>
+            <a href="https://www.instagram.com" target="_blank" style="color: #1CAAD9; text-decoration: none; font-size: 1.2em; margin: 0 10px;">Follow on Instagram</a>
+        </div>
+    </section>
+    <script>
+        function showModel(modelId) {
+            document.querySelectorAll('.sketchfab-embed-wrapper').forEach(wrapper => {
+                wrapper.style.display = 'none';
+            });
+            document.getElementById(modelId).style.display = 'block';
+        }
+    </script>
+
+    <script>
+        const colorPicker = document.getElementById('colorPicker');
+        const cubeSides = document.querySelectorAll('.cube div');
+
+        colorPicker.addEventListener('input', (event) => {
+            const color = event.target.value;
+            cubeSides.forEach(side => {
+                side.style.backgroundColor = color;
+            });
+        });
+    </script>
+</body>
+<footer style="background-color: #f8f8f8; padding: 20px; text-align: left; color: grey; font-size: 12px; font-weight: normal;">
+    <h4 class="card-title" style="font-weight: normal; color: grey;">VINAY ART GALLERY</h4>
+    <h5 style="font-weight: normal;">D-40  Dehradun,UK 248011, India | T +91 8267009117 </h5>
+    <h5 style="font-weight: normal;">D-53  Dehradun,UK 248011, India | T +91 11 8267009117</h5>
+    <h5 style="font-weight: normal;">E art@vadehraart.com</h5>
+    <h5 style="font-weight: normal;">Monday to Saturday, 10 am - 6 pm</h5>
+    <div style="text-align: right; margin-top: 10px;">
+        <a href="https://www.facebook.com" target="_blank" style="color: grey; text-decoration: none; margin: 0 10px;">
+            <i class="fab fa-facebook-f" style="font-size: 16px;"></i>
+        </a>
+        <a href="https://www.instagram.com" target="_blank" style="color: grey; text-decoration: none; margin: 0 10px;">
+            <i class="fab fa-instagram" style="font-size: 16px;"></i>
+        </a>
+        <a href="https://wa.me/918267009117" target="_blank" style="color: grey; text-decoration: none; margin: 0 10px;">
+            <i class="fab fa-whatsapp" style="font-size: 16px;"></i>
+        </a>
+        <a href="mailto:art@vadehraart.com" style="color: grey; text-decoration: none; margin: 0 10px;">
+            <i class="fas fa-envelope" style="font-size: 16px;"></i>
+        </a>
+    </div>
+    <div style="text-align: center; margin-top: 60px;">
+        <a href="https://www.facebook.com" target="_blank" style="color: grey; text-decoration: none;">Facebook</a>, 
+        <a href="https://www.instagram.com" target="_blank" style="color: grey; text-decoration: none;">Instagram</a>, 
+        <a href="mailto:art@vadehraart.com" style="color: grey; text-decoration: none;">Send an email</a>, 
+        <a href="https://www.google.com/maps" target="_blank" style="color: grey; text-decoration: none;">View on Google Maps</a>, 
+        <a href="#" style="color: grey; text-decoration: none;">Join the mailing list</a>, 
+        <a href="#" style="color: grey; text-decoration: none;">Manage cookies</a>
+    </div>
+    <p style="text-align: center;">Copyright © 2024 Vinay Art Gallery | Site by Ainz /AZ</p>
+</footer>
+
+</html>

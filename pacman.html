@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pac-Man Game</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            margin: 0;
+            position: relative;
+        }
+        canvas {
+            background-color: #000;
+        }
+        button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #pauseButton {
+            top: 60px;
+        }
+        #restartButton {
+            top: 100px;
+        }
+        #scoreBoard {
+            position: absolute;
+            top: 140px;
+            right: 20px;
+            color: white;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="pacman" width="500" height="500"></canvas>
+    <button id="restartButton">Restart Game</button>
+    <button id="quitButton">Quit Game</button>
+    <button id="pauseButton">Pause Game</button>
+    <div id="scoreBoard">Last Scores: N/A</div>
+    <script>
+        const canvas = document.getElementById('pacman');
+        const ctx = canvas.getContext('2d');
+        const quitButton = document.getElementById('quitButton');
+        const pauseButton = document.getElementById('pauseButton');
+        const restartButton = document.getElementById('restartButton');
+        const scoreBoard = document.getElementById('scoreBoard');
+
+        let pacman, food, score, obstacles, gameRunning, gamePaused;
+        let lastScores = [];
+
+        function resetGame() {
+            pacman = {
+                x: 50,
+                y: 50,
+                radius: 20,
+                speed: 5,
+                direction: 'right'
+            };
+
+            food = {
+                x: Math.random() * (canvas.width - 20) + 10,
+                y: Math.random() * (canvas.height - 20) + 10,
+                radius: 10
+            };
+
+            score = 0;
+
+            obstacles = [
+                { x: 200, y: 200, radius: 25, direction: 'left' },
+                { x: 300, y: 100, radius: 25, direction: 'down' },
+                { x: 100, y: 300, radius: 25, direction: 'up' }
+            ];
+
+            gameRunning = true;
+            gamePaused = false;
+        }
+
+        function drawPacman() {
+            ctx.beginPath();
+            let startAngle, endAngle;
+            if (pacman.direction === 'right') {
+                startAngle = 0.25 * Math.PI;
+                endAngle = 1.75 * Math.PI;
+            } else if (pacman.direction === 'left') {
+                startAngle = 1.25 * Math.PI;
+                endAngle = 0.75 * Math.PI;
+            } else if (pacman.direction === 'up') {
+                startAngle = 1.75 * Math.PI;
+                endAngle = 1.25 * Math.PI;
+            } else if (pacman.direction === 'down') {
+                startAngle = 0.75 * Math.PI;
+                endAngle = 0.25 * Math.PI;
+            }
+            ctx.arc(pacman.x, pacman.y, pacman.radius, startAngle, endAngle);
+            ctx.lineTo(pacman.x, pacman.y);
+            ctx.fillStyle = 'yellow';
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function drawFood() {
+            ctx.beginPath();
+            ctx.arc(food.x, food.y, food.radius, 0, 2 * Math.PI);
+            ctx.fillStyle = 'red';
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function drawScore() {
+            ctx.font = '20px Arial';
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'right';
+            ctx.fillText('Score: ' + score, canvas.width - 10, 30);
+        }
+
+        function updatePacman() {
+            if (pacman.direction === 'right') {
+                pacman.x += pacman.speed;
+                if (pacman.x - pacman.radius > canvas.width) {
+                    pacman.x = -pacman.radius;
+                }
+            } else if (pacman.direction === 'left') {
+                pacman.x -= pacman.speed;
+                if (pacman.x + pacman.radius < 0) {
+                    pacman.x = canvas.width + pacman.radius;
+                }
+            } else if (pacman.direction === 'up') {
+                pacman.y -= pacman.speed;
+                if (pacman.y + pacman.radius < 0) {
+                    pacman.y = canvas.height + pacman.radius;
+                }
+            } else if (pacman.direction === 'down') {
+                pacman.y += pacman.speed;
+                if (pacman.y - pacman.radius > canvas.height) {
+                    pacman.y = -pacman.radius;
+                }
+            }
+        }
+
+        function checkCollision() {
+            const distX = pacman.x - food.x;
+            const distY = pacman.y - food.y;
+            const distance = Math.sqrt(distX * distX + distY * distY);
+
+            if (distance < pacman.radius + food.radius) {
+                food.x = Math.random() * (canvas.width - 20) + 10;
+                food.y = Math.random() * (canvas.height - 20) + 10;
+                score += 100;
+            }
+        }
+
+        function drawObstacles() {
+            ctx.fillStyle = 'blue';
+            obstacles.forEach(obstacle => {
+                ctx.beginPath();
+                let startAngle, endAngle;
+                if (obstacle.direction === 'right') {
+                    startAngle = 0.25 * Math.PI;
+                    endAngle = 1.75 * Math.PI;
+                } else if (obstacle.direction === 'left') {
+                    startAngle = 1.25 * Math.PI;
+                    endAngle = 0.75 * Math.PI;
+                } else if (obstacle.direction === 'up') {
+                    startAngle = 1.75 * Math.PI;
+                    endAngle = 1.25 * Math.PI;
+                } else if (obstacle.direction === 'down') {
+                    startAngle = 0.75 * Math.PI;
+                    endAngle = 0.25 * Math.PI;
+                }
+                ctx.arc(obstacle.x, obstacle.y, obstacle.radius, startAngle, endAngle);
+                ctx.lineTo(obstacle.x, obstacle.y);
+                ctx.fill();
+                ctx.closePath();
+            });
+        }
+
+        function checkObstacleCollision() {
+            obstacles.forEach(obstacle => {
+                if (
+                    pacman.x + pacman.radius > obstacle.x - obstacle.radius &&
+                    pacman.x - pacman.radius < obstacle.x + obstacle.radius &&
+                    pacman.y + pacman.radius > obstacle.y - obstacle.radius &&
+                    pacman.y - pacman.radius < obstacle.y + obstacle.radius
+                ) {
+                    if (confirm('Game Over! Your score: ' + score + '\nDo you want to restart the game?')) {
+                        recordScore(score);
+                        resetGame();
+                    } else {
+                        gameRunning = false;
+                        recordScore(score);
+                    }
+                }
+            });
+        }
+
+        function updateObstacles() {
+            obstacles.forEach(obstacle => {
+                if (obstacle.direction === 'right') {
+                    obstacle.x += pacman.speed;
+                    if (obstacle.x - obstacle.radius > canvas.width) {
+                        obstacle.x = -obstacle.radius;
+                    }
+                } else if (obstacle.direction === 'left') {
+                    obstacle.x -= pacman.speed;
+                    if (obstacle.x + obstacle.radius < 0) {
+                        obstacle.x = canvas.width + obstacle.radius;
+                    }
+                } else if (obstacle.direction === 'up') {
+                    obstacle.y -= pacman.speed;
+                    if (obstacle.y + obstacle.radius < 0) {
+                        obstacle.y = canvas.height + obstacle.radius;
+                    }
+                } else if (obstacle.direction === 'down') {
+                    obstacle.y += pacman.speed;
+                    if (obstacle.y - obstacle.radius > canvas.height) {
+                        obstacle.y = -obstacle.radius;
+                    }
+                }
+            });
+        }
+
+        function gameLoop() {
+            if (!gameRunning || gamePaused) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawPacman();
+            drawFood();
+            drawObstacles();
+            drawScore();
+            updatePacman();
+            updateObstacles();
+            checkCollision();
+            checkObstacleCollision();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function recordScore(newScore) {
+            lastScores.push(newScore);
+            if (lastScores.length > 3) {
+                lastScores.shift();
+            }
+            updateScoreBoard();
+        }
+
+        function updateScoreBoard() {
+            scoreBoard.textContent = 'Last Scores: ' + (lastScores.length ? lastScores.join(', ') : 'N/A');
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'w') {
+                pacman.direction = 'up';
+                console.log('Moving up');
+            } else if (event.key === 'a') {
+                pacman.direction = 'left';
+                console.log('Moving left');
+            } else if (event.key === 's') {
+                pacman.direction = 'down';
+                console.log('Moving down');
+            } else if (event.key === 'd') {
+                pacman.direction = 'right';
+                console.log('Moving right');
+            }
+        });
+
+        quitButton.addEventListener('click', () => {
+            gameRunning = false;
+            alert('Game Quit! Your score: ' + score);
+            recordScore(score);
+            window.close();
+        });
+
+        pauseButton.addEventListener('click', () => {
+            gamePaused = !gamePaused;
+            pauseButton.textContent = gamePaused ? 'Resume Game' : 'Pause Game';
+            if (!gamePaused) {
+                gameLoop();
+            }
+        });
+
+        restartButton.addEventListener('click', () => {
+            recordScore(score);
+            resetGame();
+            gameLoop();
+        });
+
+        resetGame();
+        gameLoop();
+    </script>
+</body>
+</html>
